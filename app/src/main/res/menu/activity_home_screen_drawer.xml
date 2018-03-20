@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_myvideos"
+            android:title="@string/nav_myvideos" />
+        <item
+            android:id="@+id/nav_mycollections"
+            android:title="@string/nav_mycollections" />
+        <item
+            android:id="@+id/nav_mycircle"
+            android:title="@string/nav_mycircle" />
+        <item
+            android:id="@+id/nav_terms"
+            android:title="@string/nav_terms" />
+        <item
+            android:id="@+id/nav_faq"
+            android:title="@string/nav_faq" />
+    </group>
+    <group>
+        <item
+            android:id="@+id/nav_signout"
+            android:icon="@drawable/signout"
+            android:title="" />
+    </group>
+</menu>

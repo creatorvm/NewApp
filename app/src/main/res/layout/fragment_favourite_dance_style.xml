@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cvm.android.dancesterz.ui.fragments.FavouriteDanceStyleFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="40dp">
+
+        <EditText
+            android:id="@+id/favouriteDanceStyleSearchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/search_edittext"
+            android:drawableRight="@drawable/search"
+            android:ems="10"
+            android:hint="@string/search"
+            android:inputType="textPersonName" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/danceFavouriteStyleRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp" />
+
+        <Button
+            android:id="@+id/favouriteSelectedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/done_btn" />
+    </LinearLayout>
+
+</FrameLayout>

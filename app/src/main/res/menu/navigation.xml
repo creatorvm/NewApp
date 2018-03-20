@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/tabhome30"
+        android:title="" />
+
+    <item
+        android:id="@+id/navigation_alert"
+        android:icon="@drawable/tabalert30"
+        android:title="" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/tabprofile30"
+        android:title="" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/tabsettings30"
+        android:title="" />
+
+</menu>

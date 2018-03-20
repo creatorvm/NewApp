@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools"
+    card_view:cardBackgroundColor="@android:color/transparent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="9dp"
+        android:background="@android:color/background_light"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="0.01dp">
+
+        <RelativeLayout
+            android:id="@+id/top_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp">
+
+            <ImageView
+                android:id="@+id/seeall_thumbnail"
+                android:layout_width="200dp"
+                android:layout_height="130dp"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/t3"
+                android:scaleType="fitXY"
+                android:layout_alignParentLeft="true" />
+
+            <RelativeLayout
+                android:id="@+id/imagelayout"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="center_horizontal"
+                android:layout_alignParentLeft="true">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/seeall_challenger"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="100dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/baby" />
+                <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                    <!--android:id="@+id/navigationProfilePic"-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:paddingTop="@dimen/nav_header_vertical_spacing"-->
+                    <!--android:gravity="center_horizontal"-->
+                    <!--android:src="@drawable/neo"-->
+                    <!--app:civ_border_color="#FFF"-->
+                    <!--app:civ_border_width="2dp" />-->
+
+                <LinearLayout
+                    android:id="@+id/linearLayout6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/seeall_challenger"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/sa_challenger"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="Challenger"
+                        android:textColor="@color/darkgray"
+                        android:textSize="9dp" />
+
+                    <TextView
+                        android:id="@+id/sa_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/sa_challenger"
+                        android:paddingTop="5dp"
+                        android:text="Nick Name"
+                        android:textColor="#000"
+                        android:textSize="10dp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:id="@+id/sa_challenge_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="challenge name, challenge name, challenge name given by challenger"
+                        android:textColor="#000"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_horizontal|center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@string/total_views"
+                        android:textColor="#000"
+                        android:textSize="10dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="70dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/total_votes"
+                        android:textColor="#000"
+                        android:textSize="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/viewv" />
+
+                    <TextView
+                        android:id="@+id/sa_views"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:gravity="center_vertical"
+                        android:text="18,55,898"
+                        android:textColor="@color/darkgray"
+                        android:textSize="7dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="75dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/votev" />
+
+                    <TextView
+                        android:id="@+id/sa_votes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:gravity="center_vertical"
+                        android:text="18,55,898"
+                        android:textColor="@color/darkgray"
+                        android:textSize="7dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

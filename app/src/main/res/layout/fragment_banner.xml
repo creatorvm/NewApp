@@ -1,0 +1,38 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.cvm.android.dancesterz.ui.fragments.BannerFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorGrey">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btncreatechallenge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:src="@drawable/makechallenge"
+                app:backgroundTint="@color/colorTextred"
+                android:layout_marginLeft="120dp" />
+
+            <!--android:src="@drawable/ic_star_black"-->
+            <!--tools:ignore="VectorDrawableCompat"-->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/banner" />
+
+        </FrameLayout>
+    </RelativeLayout>
+
+</FrameLayout>

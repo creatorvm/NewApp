@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@android:color/transparent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="9dp"
+        card_view:cardCornerRadius="3dp"
+        card_view:cardBackgroundColor="@android:color/transparent"
+        card_view:cardElevation="0.01dp">
+        <LinearLayout
+            android:id="@+id/top_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp">
+
+            <ImageView
+                android:id="@+id/nimg_thumbnail"
+                android:layout_width="180dp"
+                android:layout_height="130dp"
+                android:background="@drawable/t4"
+                android:scaleType="fitXY" />
+
+            <LinearLayout
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="29dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:src="@drawable/viewv" />
+
+                    <TextView
+                        android:id="@+id/nviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:gravity="center_vertical"
+                        android:text="18,55,898"
+                        android:textColor="#000"
+                        android:textSize="7dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@drawable/votev" />
+
+                    <TextView
+                        android:id="@+id/nvotes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:gravity="center_vertical"
+                        android:text="18,55,898"
+                        android:textColor="#000"
+                        android:textSize="7dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/nchallenge_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="25dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="challenge name given by challenger"
+                    android:textColor="#000"
+                    android:textSize="10dp" />
+                <TextView
+                    android:id="@+id/nnickname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="nick name"
+                    android:textColor="#000"
+                    android:textSize="10dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

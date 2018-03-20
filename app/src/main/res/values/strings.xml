@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Dancesterz</string>
+    <string name="title_activity_home_screen">HomeScreenActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="nick_name">Nick Name</string>
+    <string name="first_name">First Name</string>
+    <string name="second_name">Second Name</string>
+    <string name="male_radio">Male</string>
+    <string name="female_radio">Female</string>
+    <string name="other_radio">Other</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="email">Email Id</string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="region">Region</string>
+    <string name="professional_level">Professional Level</string>
+    <string name="fav_style">Favorite Style</string>
+    <string name="select_btn">Select</string>
+    <string name="update_btn">Update</string>
+    <string name="done_btn">Done</string>
+    <string name="search">Search</string>
+    <string name="my_videos"> My Videos </string>
+    <string name="news_feeds">News Feeds </string>
+    <string name="nav_myvideos">My videos</string>
+    <string name="nav_mycollections">My Collections</string>
+    <string name="nav_mycircle">My Circle</string>
+    <string name="nav_terms">Terms</string>
+    <string name="nav_faq">FAQ</string>
+    <string name="total_votes">Total Votes</string>
+    <string name="total_views">Total Views</string>
+    <string name="profile_incompletion">Your profile is not \ncompleted</string>
+    <string name="complete_now">Complete Now!</string>
+    <string name="username">Username</string>
+    <string name="reg_pass">Password(min 8 char)</string>
+    <string name="reg_conf_pass">Retype password</string>
+    <string name="terms_and_conditions">Accept Terms And Condition</string>
+    <string name="sign_up">SignUp</string>
+    <string name="error_invalid_username">This username is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">Minimum eight characters, at least one letter and one number</string>
+    <string name="error_incorrect_username">This username is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_confirm_password">Password Mismatch</string>
+    <string name="error_username">This username is invalid</string>
+    <string name="error_invalid_number">This number is invalid</string>
+    <string name="error_invalid_email">This email is invalid</string>
+    <string name="error_invalid_phonenumber">This phone number is invalid</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
