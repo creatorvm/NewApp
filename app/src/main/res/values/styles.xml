@@ -16,7 +16,18 @@
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:background">@drawable/rounded_edittext</item>
     </style>
-
+    <style name="placechallenge">
+        <item name="android:layout_width">210dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">@drawable/red_round_view</item>
+    </style>
+    <style name="roundviewgrey">
+        <item name="android:layout_width">210dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">@drawable/roundviewgrey</item>
+    </style>
     <style name="dance_title">
         <item name="android:textSize">25dp</item>
         <item name="android:textColor">@color/colorWhite</item>

@@ -16,7 +16,20 @@
             android:layout_width="match_parent"
             app:theme="@style/ToolbarColored"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            <Button
+                style="@style/joinbutton"
+                android:layout_width="70dp"
+                android:visibility="gone"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="Join"
+                android:id="@+id/joinChallenge"
+                android:layout_gravity="right"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 

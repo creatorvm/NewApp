@@ -1,11 +1,11 @@
 package com.cvm.android.dancesterz.ui.fragments;
 
-import android.support.v4.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +17,17 @@ import android.widget.Toast;
 
 import com.cvm.android.dancesterz.R;
 import com.cvm.android.dancesterz.dao.VotingDao;
+import com.cvm.android.dancesterz.ui.VotePopUp;
 import com.cvm.android.dancesterz.ui.listeners.OnTaskCompleted;
 import com.cvm.android.dancesterz.ui.listeners.ParameterListener;
+import com.cvm.android.dancesterz.utilities.AppConstants;
 import com.cvm.android.dancesterz.utilities.PreferencesManager;
 import com.squareup.picasso.Picasso;
 
 import java.math.BigInteger;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 
 /**
  * Created by Devalopment-1 on 16-02-2018.
@@ -53,6 +58,7 @@ public class VotingFragment extends Fragment {
     protected String accepterName;
     protected String challengeName;
     protected Long accepterId;
+    protected Long voterId;
 
     ProgressDialog progressDialog = null;
 
@@ -88,13 +94,6 @@ public class VotingFragment extends Fragment {
     public void setOwnerProfilePic(String ownerProfilePic) {
         this.ownerProfilePic = ownerProfilePic;
     }
-    public Long getAccepterId() {
-        return accepterId;
-    }
-
-    public void setAccepterId(Long accepterId) {
-        this.accepterId = accepterId;
-    }
 
     public String getOwnerName() {
         return ownerName;
@@ -128,14 +127,28 @@ public class VotingFragment extends Fragment {
         this.accepterProfilePic = accepterProfilePic;
     }
 
+    public Long getAccepterId() {
+        return accepterId;
+    }
+
+    public void setAccepterId(Long accepterId) {
+        this.accepterId = accepterId;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
         View view = inflater.inflate(R.layout.voting_fragment, container, false);
+         preferencesManager=new PreferencesManager(getActivity());
+         voterId=Long.valueOf(preferencesManager.read(AppConstants.KEY_USERID));
+
 
         Log.i(TAG, "getResponseId" + ChallengeResponseId);
         Log.i(TAG, "candidateId" + candidateId);
         Log.i(TAG, "ChallengeID" + ChallengeID);
+        Log.i(TAG, "getAccepterId" + getAccepterId());
+        Log.i(TAG, "voterId" + voterId);
 
 
         no_votes_user1 = view.findViewById(R.id.no_votes_user1);
@@ -148,19 +161,19 @@ public class VotingFragment extends Fragment {
         ownerImageView = view.findViewById(R.id.ownerImageView);
         accepterImageView = view.findViewById(R.id.accepterImageView);
 
-//        addButtonListeners();
-        BigInteger ownerVote = getOwnerVote();
-        BigInteger responseVote = getResponseVote();
-        String ownerName = getOwnerName();
-        String accepterName = getAccepterName();
-        no_votes_user1.setText(ownerVote + "");
-        no_votes_user2.setText(responseVote + "");
-        ownerNickName.setText(ownerName);
-        accepterNickName.setText(accepterName);
+        addButtonListeners();
+
+        no_votes_user1.setText(getOwnerVote() + "");
+        no_votes_user2.setText(getResponseVote() + "");
+        ownerNickName.setText(getOwnerName());
+        accepterNickName.setText(getAccepterName());
+        Log.e(TAG,"Accc"+getAccepterId()+"");
 
         Picasso.with(context).load(getOwnerProfilePic()).placeholder(R.drawable.baby)
+                .transform(new CropCircleTransformation())
                 .into(ownerImageView);
         Picasso.with(context).load(getAccepterProfilePic()).placeholder(R.drawable.baby)
+                .transform(new CropCircleTransformation())
                 .into(accepterImageView);
         return view;
     }
@@ -178,79 +191,93 @@ public class VotingFragment extends Fragment {
         super.onDetach();
     }
 
-//    private void addButtonListeners() {
-//        btnvoteUser1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(final View v) {
-//                progressDialog = new ProgressDialog(getActivity());
-//                progressDialog.setMessage("Please Wait...");
-//                progressDialog.setCanceledOnTouchOutside(false);
-//                progressDialog.show();
-//                try {
-//                    Log.i(TAG, "In first user vote Method button click");
-//
-//                    votingDao = new VotingDao(candidateId,getAccepterId(), ChallengeID, ChallengeResponseId, Long.valueOf(1), Long.valueOf(0), preferencesManager, new ParameterListener() {
-//                        @Override
-//                        public void OnTaskCompletedWithParameter(String votes) {
-//                            progressDialog.dismiss();
-//                            if (votes.equals("0")) {
-//                                Toast.makeText(getActivity(), "Sorry your vote has already placed", Toast.LENGTH_LONG).show();
-//                            } else {
-////                                startActivity(new Intent(getActivity(), VotePopUp.class));
+    private void addButtonListeners() {
+        btnvoteUser1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setMessage("Please Wait...");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+                try {
+                    Log.i(TAG, "In first user vote Method button click");
+                    Log.i(TAG, "ChallengeResponseId" + ChallengeResponseId);
+                    Log.i(TAG, "candidateId" + candidateId);
+                    Log.i(TAG, "ChallengeID" + ChallengeID);
+                    Log.i(TAG, "voterId" + voterId);
+
+                    votingDao = new VotingDao(voterId,candidateId, ChallengeID, ChallengeResponseId, Long.valueOf(1), Long.valueOf(0), new ParameterListener() {
+                        @Override
+                        public void OnTaskCompletedWithParameter(String votes) {
+                            progressDialog.dismiss();
+                            if (votes.equals("0")) {
+                                Toast.makeText(getActivity(), "Sorry your vote has already placed", Toast.LENGTH_LONG).show();
+                            } else {
+                                startActivity(new Intent(getActivity(), VotePopUp.class));
+
+//                                String text = (String) no_votes_user1.getText();
+//                                BigInteger voteBigInteger = new BigInteger(text);
+////                                BigInteger responsBigInteger = new BigInteger(votes);
+//                                BigInteger responsBigInteger = new BigInteger("1");
+//                                Log.e(TAG,voteBigInteger+"  "+responsBigInteger+"");
+//                                BigInteger add = voteBigInteger.add(responsBigInteger);
+//                                Log.e(TAG,add+"  ");
+
+                                no_votes_user1.setText(votes + "");
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.e(TAG,e.getMessage());
+                }
+            }
+        });
+        btnvoteUser2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setMessage("Please Wait...");
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+                try {
+                    Log.i(TAG, "In second user vote Method button click");
+                    Log.i(TAG, "ChallengeResponseId" + ChallengeResponseId);
+                    Log.i(TAG, "ChallengeID" + ChallengeID);
+                    Log.i(TAG, "AccepterId" +getAccepterId());
+                    Log.i(TAG, "voterId" + voterId);
+
+                    votingDao = new VotingDao(voterId,getAccepterId(), ChallengeID, ChallengeResponseId, Long.valueOf(0), Long.valueOf(1), new ParameterListener() {
+                        @Override
+                        public void OnTaskCompletedWithParameter(String votes) {
+                            progressDialog.dismiss();
+
+                            if (votes.equals("0")) {
+                                Toast.makeText(getActivity(), "Sorry your vote has already placed", Toast.LENGTH_LONG).show();
+                            } else {
+                                startActivity(new Intent(getActivity(), VotePopUp.class));
 //                                String text = (String) no_votes_user1.getText();
 //                                BigInteger voteBigInteger = new BigInteger(text);
 ////                                BigInteger responsBigInteger = new BigInteger(votes);
 //                                BigInteger responsBigInteger = new BigInteger("1");
 //                                BigInteger add = voteBigInteger.add(responsBigInteger);
-//                                no_votes_user1.setText(add + "");
-//                            }
-//                        }
-//                    });
-//                } catch (Exception e) {
-//
-//                }
-//            }
-//        });
-//        btnvoteUser2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                progressDialog = new ProgressDialog(getActivity());
-//                progressDialog.setMessage("Please Wait...");
-//                progressDialog.setCanceledOnTouchOutside(false);
-//                progressDialog.show();
-//                try {
-//                    Log.i(TAG, "In second user vote Method button click");
-//                    votingDao = new VotingDao(candidateId, ChallengeID, ChallengeResponseId, Long.valueOf(0), Long.valueOf(1), preferencesManager, new ParameterListener() {
-//                        @Override
-//                        public void OnTaskCompletedWithParameter(String votes) {
-//                            progressDialog.dismiss();
-//                            if (votes.equals("0")) {
-//                                Toast.makeText(getActivity(), "Sorry your vote has already placed", Toast.LENGTH_LONG).show();
-//                            } else {
-////                                startActivity(new Intent(getActivity(), VotePopUp.class));
-//                                String text = (String) no_votes_user1.getText();
-//                                BigInteger voteBigInteger = new BigInteger(text);
-////                                BigInteger responsBigInteger = new BigInteger(votes);
-//                                BigInteger responsBigInteger = new BigInteger("1");
-//                                BigInteger add = voteBigInteger.add(responsBigInteger);
-//                                no_votes_user2.setText(add + "");
-//                            }
-//                        }
-//                    });
-//                } catch (Exception e) {
-//
-//                }
-//            }
-//        });
+                                no_votes_user2.setText(votes +"");
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.e(TAG,e.getMessage());
+                }
+            }
+        });
+    }
+
+//    public PreferencesManager getPreferencesManager() {
+//        return preferencesManager;
 //    }
-
-    public PreferencesManager getPreferencesManager() {
-        return preferencesManager;
-    }
-
-    public void setPreferencesManager(PreferencesManager preferencesManager) {
-        this.preferencesManager = preferencesManager;
-    }
+//
+//    public void setPreferencesManager(PreferencesManager preferencesManager) {
+//        this.preferencesManager = preferencesManager;
+//    }
 
     public Long getCandidateId() {
         return candidateId;

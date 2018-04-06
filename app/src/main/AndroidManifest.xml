@@ -40,6 +40,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.PlaceChallengeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.SignUpActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity android:name=".ui.ChallengeVoteActivity" />

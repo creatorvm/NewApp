@@ -13,8 +13,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cvm.android.dancesterz.R;
 import com.cvm.android.dancesterz.ui.fragments.HomeScreenFragment;
@@ -30,17 +30,19 @@ public class HomeScreenActivity extends BaseUIActivity
     TextView userNickNameTextView = null;
     TextView navigationTotalFollowersTextView = null;
     TextView navigationTotalViewsTextView = null;
-
+    public static Button join=null;
     PreferencesManager preferencesManager;
     public static Context contextOfApplication;
 
-    int backPressed = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        join=findViewById(R.id.joinChallenge);
+        join.setVisibility(View.GONE);
         toolbar.setTitleTextColor(getResources().getColor(R.color.darkgray));
         setSupportActionBar(toolbar);
 
@@ -89,6 +91,7 @@ public class HomeScreenActivity extends BaseUIActivity
 //        if (backPressed <= 1) {
 //            Toast.makeText(contextOfApplication, "Press twice to exit", Toast.LENGTH_SHORT).show();
 //        } else if (backPressed == 2) {
+           join.setVisibility(View.GONE);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);

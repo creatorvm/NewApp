@@ -116,8 +116,6 @@ public class ChallengeVoteFragment extends Fragment {
             public void onTaskCompleted() {
                 Log.i(TAG, "Inside onTaskCompleted Method on GetAcceptChallenges");
 
-
-
                 if (alAcceptList.isEmpty()) {
                     VideoPlayer.getInstance().setMediaUrl(Uri.parse(Challenge_videoPath));
                     VideoPlayer.getInstance().play();
@@ -150,7 +148,6 @@ public class ChallengeVoteFragment extends Fragment {
 
 //            for (AcceptChallengeDto challengeDto : alAcceptList) {
             VotingFragment.getInstance().setCandidateId(candidateId);
-            VotingFragment.getInstance().setPreferencesManager(preferencesManager);
             VotingFragment.getInstance().setChallengeResponseId(alAcceptList.get(0).getResponseId());
             VotingFragment.getInstance().setChallengeID(alAcceptList.get(0).getChallengeId());
             if (alAcceptList.get(0).getAccepterVote() != null) {

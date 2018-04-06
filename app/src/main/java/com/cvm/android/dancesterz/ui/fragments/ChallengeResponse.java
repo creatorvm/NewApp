@@ -1,6 +1,6 @@
 package com.cvm.android.dancesterz.ui.fragments;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +16,7 @@ import com.cvm.android.dancesterz.dao.ChallengeViewDao;
 import com.cvm.android.dancesterz.dto.AcceptChallengeDto;
 import com.cvm.android.dancesterz.dto.ChallengeDto;
 import com.cvm.android.dancesterz.ui.HomeScreenActivity;
+import com.cvm.android.dancesterz.ui.PlaceChallengeActivity;
 import com.cvm.android.dancesterz.ui.listeners.OnTaskCompleted;
 import com.cvm.android.dancesterz.utilities.AppConstants;
 import com.cvm.android.dancesterz.utilities.PreferencesManager;
@@ -43,8 +44,9 @@ public class ChallengeResponse extends Fragment {
     LinearLayout challengeVideoLinearLayout;
     LinearLayout challengeVoteLinearLayout;
     LinearLayout challengeAccepterLinearLayout;
-
+    LinearLayout mainlayoutChallengeResponse;
     PreferencesManager preferencesManager;
+    private static final String RECORDED_VIDEO = "challengeResponse.mp4";
 
     public ChallengeResponse() {
         // Required empty public constructor
@@ -86,6 +88,8 @@ public class ChallengeResponse extends Fragment {
         challengeVideoLinearLayout = view.findViewById(R.id.challengeVideoLinearLayout);
         challengeVoteLinearLayout = view.findViewById(R.id.challengeVoteLinearLayout);
         challengeAccepterLinearLayout = view.findViewById(R.id.challengeResponseLinearLayout);
+
+         HomeScreenActivity.join.setVisibility(View.VISIBLE);
         if (getArguments() != null) {
             Challenge_videoPath = getArguments().getString(AppConstants.PLAY_VIDEO);
             ChallengeId = getArguments().getLong(AppConstants.CHALLENGE_ID);
@@ -95,18 +99,38 @@ public class ChallengeResponse extends Fragment {
             challengeName = getArguments().getString(AppConstants.CHALLENGE_NAME);
             chaudioId = getArguments().getLong(AppConstants.CHAUDIO_ID);
         }
+
         ActionBar supportActionBar = ((HomeScreenActivity) getActivity()).getSupportActionBar();
         supportActionBar.setTitle(challengeName);
-//        supportActionBar.setIcon(R.drawable.signout);
         preferencesManager = new PreferencesManager(getActivity());
         alAcceptList = new ArrayList<AcceptChallengeDto>();
         challengeList = new ArrayList<ChallengeDto>();
+        HomeScreenActivity.join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG,"In recordvideo Method" );
+                loadVideoRecordingFragment();
+            }
+        });
 
         new ChallengeVoteAsyncTask().execute();
-//        getChildFragmentManager().beginTransaction().replace(R.id.challengeVideoLinearLayout, Exoplayer_Fragment.getInstance()).commit();
+
         return view;
     }
 
+    public void loadVideoRecordingFragment()
+    {
+        Log.i(TAG,"In recordvideo Method" );
+        getActivity().finish();
+        Intent intent=new Intent(getActivity(),PlaceChallengeActivity.class);
+        intent.putExtra(AppConstants.PLAY_VIDEO,Challenge_videoPath);
+        intent.putExtra(AppConstants.CHALLENGE_ID,ChallengeId);
+        intent.putExtra(AppConstants.CHALLENGE_VIDEOID,ChallengeVideoId);
+        intent.putExtra(AppConstants.CHALLENGE_AUDIOPATH,audiopath);
+        intent.putExtra(AppConstants.CHAUDIO_ID,chaudioId);
+        Log.i(TAG," Calling VideoRecording Activity" );
+        startActivity(intent);
+    }
 
     private class ChallengeVoteAsyncTask extends AsyncTask<Void, Void, Void> {
 
@@ -124,38 +148,30 @@ public class ChallengeResponse extends Fragment {
             public void onTaskCompleted() {
                 Log.i(TAG, "Inside onTaskCompleted Method on GetAcceptChallenges");
 
-
-
                 if (alAcceptList.isEmpty()) {
-//                    Exoplayer_Fragment.getInstance().setMediaUrl(Challenge_videoPath);
-//                    getChildFragmentManager().beginTransaction().replace(R.id.challengeVideoLinearLayout, Exoplayer_Fragment.getInstance()).commit();
-//                    Exoplayer_Fragment.getInstance().setMediaUrl(Challenge_videoPath);
-//                    VideoPlayer.getInstance().play();
-                    // Setting Width -
-//                    setVideoPlayerFullWidth();
-                    getChildFragmentManager().beginTransaction().replace(R.id.challengeVideoLinearLayout, Exoplayer_Fragment.newInstance(Challenge_videoPath)).commit();
+
+
+                    ((HomeScreenActivity)getContext()).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.challengeVideoLinearLayout, Exoplayer_Fragment.newInstance(Challenge_videoPath))
+                            .commit();
+
                 } else {
                     Log.i(TAG, "url" + alAcceptList.get(0).getVideo().getSourcePath());
-//                    Exoplayer_Fragment.getInstance().setMediaUrl(Challenge_videoPath);
-//                    getChildFragmentManager().beginTransaction().replace(R.id.challengeVideoLinearLayout, Exoplayer_Fragment.getInstance()).commit();
-//
-//                    VideoPlayer.getInstance().play();
-                    // Setting Width -
-//                    setVideoPlayerFullWidth();
-                    getChildFragmentManager().beginTransaction().replace(R.id.challengeVideoLinearLayout, Exoplayer_Fragment.newInstance(alAcceptList.get(0).getVideo().getSourcePath())).commit();
+
+
+                    ((HomeScreenActivity)getContext()).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.challengeVideoLinearLayout, Exoplayer_Fragment.newInstance(alAcceptList.get(0).getVideo().getSourcePath()))
+                            .commit();
+
                     loadVotingFragment();
                 }
-//                getChildFragmentManager().beginTransaction().replace(R.id.challengeVideoLinearLayout, VideoPlayer.getInstance()).commit();
-//                VideoPlayer.getInstance().play();
+
                 Log.i(TAG, "End of onTaskCompleted Method on GetAcceptChallenges");
             }
         });
         chalengeViewDao.getAcceptChallenges(alAcceptList, challengeList);
         Log.i(TAG, "  Method GetAcceptChallenges finished");
 
-//        if (alAcceptList != null) {
-//            getChildFragmentManager().beginTransaction().replace(R.id.challengeResponseLinearLayout, ChallegeAcceptersFragment.newInstance(candidateId)).commit();
-//        }
     }
 
     public void loadVotingFragment() {
@@ -170,7 +186,6 @@ public class ChallengeResponse extends Fragment {
 
 //            for (AcceptChallengeDto challengeDto : alAcceptList) {
             VotingFragment.getInstance().setCandidateId(candidateId);
-            VotingFragment.getInstance().setPreferencesManager(preferencesManager);
             VotingFragment.getInstance().setChallengeResponseId(alAcceptList.get(0).getResponseId());
             VotingFragment.getInstance().setChallengeID(alAcceptList.get(0).getChallengeId());
             if (alAcceptList.get(0).getAccepterVote() != null) {

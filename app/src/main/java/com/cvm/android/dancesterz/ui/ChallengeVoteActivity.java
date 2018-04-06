@@ -32,7 +32,6 @@ import com.cvm.android.dancesterz.dao.VotingDao;
 import com.cvm.android.dancesterz.dto.AcceptChallengeDto;
 import com.cvm.android.dancesterz.dto.ChallengeDto;
 import com.cvm.android.dancesterz.ui.adapters.ChallengeAdapter;
-import com.cvm.android.dancesterz.ui.fragments.Exoplayer_Fragment;
 import com.cvm.android.dancesterz.ui.fragments.VideoPlayer;
 import com.cvm.android.dancesterz.ui.fragments.VotingFragment;
 import com.cvm.android.dancesterz.ui.listeners.OnTaskCompleted;
@@ -49,7 +48,7 @@ public class ChallengeVoteActivity extends AppCompatActivity {
     ChallengeViewDao chalengeViewDao;
     RecyclerView rchallengelistView;
     ChallengeAdapter rchallengelistViewadapter;
-    public  static  PreferencesManager preferencesManager;
+    public  static PreferencesManager preferencesManager;
     List<AcceptChallengeDto> alAcceptList=null;
     List<ChallengeDto> challengeList = null;
     String Challenge_videoPath,audiopath;
@@ -126,7 +125,7 @@ public class ChallengeVoteActivity extends AppCompatActivity {
         alAcceptList        = new ArrayList<AcceptChallengeDto>();
         challengeList        = new ArrayList<ChallengeDto>();
 
-//        new ChallengeVoteAsyncTask().execute();
+        new ChallengeVoteAsyncTask().execute();
 
         rchallengelistView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rchallengelistViewadapter = new ChallengeAdapter(alAcceptList, getApplicationContext(),candidateId,challengeList);
