@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.cvm.android.dancesterz.R;
 import com.cvm.android.dancesterz.dao.VotingDao;
-import com.cvm.android.dancesterz.ui.VotePopUp;
 import com.cvm.android.dancesterz.ui.listeners.OnTaskCompleted;
 import com.cvm.android.dancesterz.ui.listeners.ParameterListener;
 import com.cvm.android.dancesterz.utilities.AppConstants;
@@ -213,7 +212,7 @@ public class VotingFragment extends Fragment {
                             if (votes.equals("0")) {
                                 Toast.makeText(getActivity(), "Sorry your vote has already placed", Toast.LENGTH_LONG).show();
                             } else {
-                                startActivity(new Intent(getActivity(), VotePopUp.class));
+//                                startActivity(new Intent(getActivity(), VotePopUp.class));
 
 //                                String text = (String) no_votes_user1.getText();
 //                                BigInteger voteBigInteger = new BigInteger(text);
@@ -254,7 +253,7 @@ public class VotingFragment extends Fragment {
                             if (votes.equals("0")) {
                                 Toast.makeText(getActivity(), "Sorry your vote has already placed", Toast.LENGTH_LONG).show();
                             } else {
-                                startActivity(new Intent(getActivity(), VotePopUp.class));
+//                                startActivity(new Intent(getActivity(), VotePopUp.class));
 //                                String text = (String) no_votes_user1.getText();
 //                                BigInteger voteBigInteger = new BigInteger(text);
 ////                                BigInteger responsBigInteger = new BigInteger(votes);

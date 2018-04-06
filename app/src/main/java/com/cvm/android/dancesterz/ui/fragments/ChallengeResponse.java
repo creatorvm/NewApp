@@ -16,8 +16,6 @@ import com.cvm.android.dancesterz.dao.ChallengeViewDao;
 import com.cvm.android.dancesterz.dto.AcceptChallengeDto;
 import com.cvm.android.dancesterz.dto.ChallengeDto;
 import com.cvm.android.dancesterz.ui.HomeScreenActivity;
-import com.cvm.android.dancesterz.ui.PlaceChallengeActivity;
-import com.cvm.android.dancesterz.ui.VideoRecordingActivity;
 import com.cvm.android.dancesterz.ui.listeners.OnTaskCompleted;
 import com.cvm.android.dancesterz.utilities.AppConstants;
 import com.cvm.android.dancesterz.utilities.PreferencesManager;
@@ -124,14 +122,14 @@ public class ChallengeResponse extends Fragment {
          Log.i(TAG,"In recordvideo Method" );
          getActivity().finish();
 
-        Intent intent=new Intent(getActivity(),VideoRecordingActivity.class);
-        intent.putExtra(AppConstants.PLAY_VIDEO,Challenge_videoPath);
-        intent.putExtra(AppConstants.CHALLENGE_ID,ChallengeId);
-        intent.putExtra(AppConstants.CHALLENGE_VIDEOID,ChallengeVideoId);
-        intent.putExtra(AppConstants.CHALLENGE_AUDIOPATH,audiopath);
-        intent.putExtra(AppConstants.CHAUDIO_ID,chaudioId);
-        Log.i(TAG," Calling VideoRecording Activity" );
-        startActivity(intent);
+//        Intent intent=new Intent(getActivity(),VideoRecordingActivity.class);
+//        intent.putExtra(AppConstants.PLAY_VIDEO,Challenge_videoPath);
+//        intent.putExtra(AppConstants.CHALLENGE_ID,ChallengeId);
+//        intent.putExtra(AppConstants.CHALLENGE_VIDEOID,ChallengeVideoId);
+//        intent.putExtra(AppConstants.CHALLENGE_AUDIOPATH,audiopath);
+//        intent.putExtra(AppConstants.CHAUDIO_ID,chaudioId);
+//        Log.i(TAG," Calling VideoRecording Activity" );
+//        startActivity(intent);
     }
 
     private class ChallengeVoteAsyncTask extends AsyncTask<Void, Void, Void> {
