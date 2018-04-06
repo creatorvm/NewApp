@@ -98,7 +98,7 @@ public class ChallengeVoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_vote);
         rchallengelistView = (RecyclerView) findViewById(R.id.vchallenges_list);
-//        ChallengevideoSurface=(SurfaceView)findViewById(R.id.videoSurface1);
+//      ChallengevideoSurface=(SurfaceView)findViewById(R.id.videoSurface1);
 
 //        navigationDrawer();
         preferencesManager=new PreferencesManager(getApplicationContext());
