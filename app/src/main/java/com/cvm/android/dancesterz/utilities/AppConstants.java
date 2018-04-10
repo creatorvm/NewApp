@@ -75,7 +75,8 @@ public class AppConstants {
     public static    boolean logOut = false;
     public static final String KEY_LOGGEDIN = "LOGGEDIN";
 
-
+    public static final String USERTYPE = "usertype";
+    public static final String USERTYPEVALUE = "usertypevalue";
     public static final String URL = "url";
     public static final String SOURCEPATH = "sourcepath";
     public static final String HEADING = "heading";

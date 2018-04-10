@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.cvm.android.dancesterz.R;
 import com.cvm.android.dancesterz.dto.AudioDto;
 import com.cvm.android.dancesterz.ui.MainActivity;
+import com.cvm.android.dancesterz.ui.VideoRecordingActivity;
 import com.cvm.android.dancesterz.utilities.AppConstants;
 import com.cvm.android.dancesterz.ui.listeners.onItemClickListener;
 
@@ -49,8 +50,9 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(context, VideoPlayerActivity.class);
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, VideoRecordingActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(AppConstants.USERTYPE, "user1");
                 intent.putExtra(AppConstants.PLAY_AUDIO, audioArrayList.get(position).getSourcePath());
                 intent.putExtra(AppConstants.AUDIO_ID, audioArrayList.get(position).getId());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

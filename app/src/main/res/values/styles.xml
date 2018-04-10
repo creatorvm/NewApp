@@ -48,7 +48,12 @@
     <style name="ToolbarColored" parent="AppTheme">
         <item name="android:textColorSecondary">#666</item>
     </style>
+    <style name="playerbtn">
+        <item name="android:layout_width">210dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:background">@drawable/red_round_view</item>
 
+    </style>
     <style name="votebtn1">
         <item name="android:layout_width">130dp</item>
         <item name="android:layout_height">30dp</item>

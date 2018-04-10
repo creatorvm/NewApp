@@ -31,9 +31,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int ITEM = 0;
     private static final int LOADING = 1;
 
-//    public NewsAdapter(List<ChallengeDto> alhotchallenge) {
-//        this.alhotchallenge = alhotchallenge;
-//    }
 
     public NewsAdapter(Context context, String heading, List<ChallengeDto> alhotchallenge) {
         this.context = context;

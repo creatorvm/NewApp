@@ -33,7 +33,6 @@ public class SplashScreenActivity extends BaseUIActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
                 loginDao = new LoginDao(SplashScreenActivity.this, preferencesManager, new OnTaskCompleted() {
                     @Override
                     public void onTaskCompleted() {

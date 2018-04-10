@@ -88,7 +88,6 @@ public class LoginDao extends BaseDao {
                 TOKEN = authResponse.getToken();
                 if (authResponse.getRefreshToken() != null)
                     REFRESH_TOKEN = authResponse.getRefreshToken();
-
                 preferencesManager.store(AppConstants.KEY_TOKEN, TOKEN);
                 preferencesManager.store(AppConstants.KEY_REFRESHTOKEN, REFRESH_TOKEN);
                 preferencesManager.store(AppConstants.KEY_USERID, authResponse.getUser().getUserId().toString());

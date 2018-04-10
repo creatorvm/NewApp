@@ -49,7 +49,8 @@ public class ChallengeResponse extends Fragment {
     PreferencesManager preferencesManager;
     private static final String RECORDED_VIDEO = "challengeResponse.mp4";
 
-    public ChallengeResponse() {
+    public ChallengeResponse()
+    {
         // Required empty public constructor
     }
 
@@ -125,6 +126,7 @@ public class ChallengeResponse extends Fragment {
          getActivity().finish();
 
         Intent intent=new Intent(getActivity(),VideoRecordingActivity.class);
+        intent.putExtra(AppConstants.USERTYPE, "user2");
         intent.putExtra(AppConstants.PLAY_VIDEO,Challenge_videoPath);
         intent.putExtra(AppConstants.CHALLENGE_ID,ChallengeId);
         intent.putExtra(AppConstants.CHALLENGE_VIDEOID,ChallengeVideoId);
