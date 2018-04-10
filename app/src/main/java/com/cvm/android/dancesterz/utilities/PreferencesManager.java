@@ -41,18 +41,7 @@ public class PreferencesManager {
     }
 
 
-    public String readToken(Context context, String Pref_key, String Token_key){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(Pref_key, Context.MODE_PRIVATE);
-        String temp = sharedPreferences.getString(Token_key,null);
-        return temp;
-    }
 
-
-    public Long readUserId(Context context, String Pref_key, String UserId_Key){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(Pref_key, Context.MODE_PRIVATE);
-        Long temp = sharedPreferences.getLong(UserId_Key,0);
-        return temp;
-    }
     public void remove(String key){
          Log.i("Preferences","In remove");
          SharedPreferences sharedPreferences = context.getSharedPreferences(key, Context.MODE_PRIVATE);
