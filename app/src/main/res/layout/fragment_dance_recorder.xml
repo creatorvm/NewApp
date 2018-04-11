@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recorderViewLayout">
+
+        <com.cvm.android.dancesterz.ui.fragments.AutoFitTextureView
+            android:id="@+id/texture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:keepScreenOn="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/timmerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#07000000"
+            android:gravity="center_horizontal"
+            android:textSize="75sp"
+            android:textStyle="bold|italic"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <!--android:layout_alignParentRight="true"-->
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10px"
+            android:layout_marginLeft="10px"
+            android:src="@drawable/filters" />
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_centerInParent="true"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/circular"
+            android:secondaryProgress="100" />
+
+        <ImageView
+            android:id="@+id/video"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/home"
+            android:scaleType="fitCenter"
+            android:contentDescription="TODO"
+            />
+
+
+        <ImageView
+            android:id="@+id/cameraFlipsImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="TODO"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10px"
+            android:layout_marginRight="10px"
+            android:src="@drawable/camera" />
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
