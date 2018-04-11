@@ -37,6 +37,7 @@ public class MainActivity extends BaseUIActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(i);
+                finish();
 //                new HomeScreenAsyncTask().execute();
             }
         });

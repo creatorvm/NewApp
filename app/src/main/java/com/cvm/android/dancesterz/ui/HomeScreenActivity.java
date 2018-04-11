@@ -17,7 +17,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cvm.android.dancesterz.R;
+import com.cvm.android.dancesterz.ui.fragments.EditCircleFragment;
 import com.cvm.android.dancesterz.ui.fragments.HomeScreenFragment;
+import com.cvm.android.dancesterz.ui.fragments.MyCircleFragment;
 import com.cvm.android.dancesterz.ui.fragments.ProfileFragment;
 import com.cvm.android.dancesterz.utilities.AppConstants;
 import com.cvm.android.dancesterz.utilities.BottomNavigationViewHelper;
@@ -30,7 +32,7 @@ public class HomeScreenActivity extends BaseUIActivity
     TextView userNickNameTextView = null;
     TextView navigationTotalFollowersTextView = null;
     TextView navigationTotalViewsTextView = null;
-    public static Button join=null;
+    public static Button join = null;
     PreferencesManager preferencesManager;
     public static Context contextOfApplication;
 
@@ -41,7 +43,7 @@ public class HomeScreenActivity extends BaseUIActivity
         setContentView(R.layout.activity_home_screen);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        join=findViewById(R.id.joinChallenge);
+        join = findViewById(R.id.joinChallenge);
         join.setVisibility(View.GONE);
         toolbar.setTitleTextColor(getResources().getColor(R.color.darkgray));
         setSupportActionBar(toolbar);
@@ -91,13 +93,13 @@ public class HomeScreenActivity extends BaseUIActivity
 //        if (backPressed <= 1) {
 //            Toast.makeText(contextOfApplication, "Press twice to exit", Toast.LENGTH_SHORT).show();
 //        } else if (backPressed == 2) {
-           join.setVisibility(View.GONE);
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
-            } else {
-                super.onBackPressed();
-            }
+        join.setVisibility(View.GONE);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
 //        }
     }
 
@@ -110,9 +112,9 @@ public class HomeScreenActivity extends BaseUIActivity
         if (id == R.id.nav_myvideos) {
             // Handle the camera action
         } else if (id == R.id.nav_mycollections) {
-
+            getFragmentManager().beginTransaction().replace(R.id.parentFrameLayout, EditCircleFragment.newInstance("", "")).commit();
         } else if (id == R.id.nav_mycircle) {
-
+            getFragmentManager().beginTransaction().replace(R.id.parentFrameLayout, MyCircleFragment.newInstance("", "")).commit();
         } else if (id == R.id.nav_terms) {
 
         } else if (id == R.id.nav_faq) {
