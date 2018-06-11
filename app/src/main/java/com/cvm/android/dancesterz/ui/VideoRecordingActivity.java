@@ -1,12 +1,10 @@
 package com.cvm.android.dancesterz.ui;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -25,8 +23,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -39,12 +35,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.cvm.android.dancesterz.MyCameraSurfaceView;
 import com.cvm.android.dancesterz.R;
 import com.cvm.android.dancesterz.utilities.AppConstants;
 import com.cvm.android.dancesterz.utilities.PreferencesManager;
-import com.cvm.android.dancesterz.utilities.URLs;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -53,27 +47,26 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class VideoRecordingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private PreferencesManager preferencesManager;
-    private Camera              myCamera;
+    private Camera myCamera;
     private MyCameraSurfaceView myCameraSurfaceView;
-    private MediaRecorder       mediaRecorder;
-    private ImageView           cameraFlipImageView = null;
-    private boolean             recording=false;
-    private int                 cameraId = 0;
-    private ImageButton         recordingImageButton = null;
-    private ProgressBar         progressBar = null;
-    private TextView            timerTextView = null;
-    private ProgressDialog      mProgressDialog;
-    private MediaPlayer         mediaPlayer = null;
-    private FrameLayout         myCameraRecordingFrameLayout;
-    static final String TAG     ="VideoRecordingActivity";
-    private String              audiopath,Challenge_videoPath,usertype;
-    private Long                ChallengeId,ChallengeVideoId,chaudioId,audioId;
+    private MediaRecorder mediaRecorder;
+    private ImageView cameraFlipImageView = null;
+    private boolean recording = false;
+    private int cameraId = 0;
+    private ImageButton recordingImageButton = null;
+    private ProgressBar progressBar = null;
+    private TextView timerTextView = null;
+    private ProgressDialog mProgressDialog;
+    private MediaPlayer mediaPlayer = null;
+    private FrameLayout myCameraRecordingFrameLayout;
+    static final String TAG = "VideoRecordingActivity";
+    private String audiopath, Challenge_videoPath, usertype;
+    private Long ChallengeId, ChallengeVideoId, chaudioId, audioId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,35 +74,33 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        cameraFlipImageView  = findViewById(R.id.cameraFlipsImageView);
+        cameraFlipImageView = findViewById(R.id.cameraFlipsImageView);
         recordingImageButton = findViewById(R.id.recordingImageButton);
-        progressBar          = findViewById(R.id.progressBar1);
+        progressBar = findViewById(R.id.progressBar1);
         myCameraRecordingFrameLayout = findViewById(R.id.videoRecordingFrameLayout);
 
         mediaPlayer = new MediaPlayer();
         mediaRecorder = new MediaRecorder();
 
-        usertype=getIntent().getExtras().getString(AppConstants.USERTYPE);
-        if(usertype.equals("user1"))
-        {
+        usertype = getIntent().getExtras().getString(AppConstants.USERTYPE);
+        audiopath = getIntent().getExtras().getString(AppConstants.CHALLENGE_AUDIOPATH);
+        if (usertype.equals("user1")) {
             Log.i(TAG, "first user");
-            Challenge_videoPath=getIntent().getExtras().getString(AppConstants.PLAY_AUDIO);
-            audioId             = getIntent().getExtras().getLong(AppConstants.AUDIO_ID);
-            Log.e(TAG,audiopath+"audio ID"+audioId);
+            Challenge_videoPath = getIntent().getExtras().getString(AppConstants.PLAY_AUDIO);
+            audioId = getIntent().getExtras().getLong(AppConstants.AUDIO_ID);
+            Log.e(TAG, audiopath + "audio ID" + audioId);
+        } else {
+
+            Log.i(TAG, "second user");
+            Challenge_videoPath = getIntent().getExtras().getString(AppConstants.PLAY_VIDEO);
+            ChallengeId = getIntent().getExtras().getLong(AppConstants.CHALLENGE_ID);
+            ChallengeVideoId = getIntent().getExtras().getLong(AppConstants.CHALLENGE_VIDEOID);
+
+            chaudioId = getIntent().getExtras().getLong(AppConstants.CHAUDIO_ID);
+            Log.i(TAG, Challenge_videoPath + "ChallengeId " + ChallengeId + "ChallengeVideoId " + ChallengeVideoId + " chaudioId" + chaudioId + " audiopath" + audiopath);
         }
-
-     else {
-
-         Log.i(TAG, "second user");
-         Challenge_videoPath = getIntent().getExtras().getString(AppConstants.PLAY_VIDEO);
-         ChallengeId = getIntent().getExtras().getLong(AppConstants.CHALLENGE_ID);
-         ChallengeVideoId = getIntent().getExtras().getLong(AppConstants.CHALLENGE_VIDEOID);
-         audiopath = getIntent().getExtras().getString(AppConstants.CHALLENGE_AUDIOPATH);
-         chaudioId = getIntent().getExtras().getLong(AppConstants.CHAUDIO_ID);
-          Log.i(TAG, Challenge_videoPath + "ChallengeId " + ChallengeId + "ChallengeVideoId " + ChallengeVideoId + " chaudioId" + chaudioId + " audiopath" + audiopath);
-     }
         //download song
-        preferencesManager=new PreferencesManager(getApplicationContext());
+        preferencesManager = new PreferencesManager(getApplicationContext());
         mProgressDialog = new ProgressDialog(VideoRecordingActivity.this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -128,35 +119,36 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
         //Get Camera for preview
         myCamera = getCameraInstance();
         if (myCamera == null) {
-                   Toast.makeText(VideoRecordingActivity.this, "Fail to get Camera", Toast.LENGTH_LONG).show();
-                              }else{
-        myCameraSurfaceView = new MyCameraSurfaceView(this, myCamera);
-        myCameraRecordingFrameLayout.addView(myCameraSurfaceView);
-        timerTextView = new TextView(VideoRecordingActivity.this);
-        timerTextView.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        timerTextView.setGravity(Gravity.CENTER);
-        timerTextView.setTextSize(75);
-        timerTextView.setTypeface(null, Typeface.BOLD_ITALIC);
-        //timerTextView.setTextColor(getResources().getColor(R.color.timercolor));
-        myCameraRecordingFrameLayout.addView(timerTextView);
-        timerTextView.setVisibility(View.GONE);
-        recordingImageButton.setOnClickListener(this);
-        cameraFlipImageView.setOnClickListener(this);
-                                   }}
+            Toast.makeText(VideoRecordingActivity.this, "Fail to get Camera", Toast.LENGTH_LONG).show();
+        } else {
+            myCameraSurfaceView = new MyCameraSurfaceView(this, myCamera);
+            myCameraRecordingFrameLayout.addView(myCameraSurfaceView);
+            timerTextView = new TextView(VideoRecordingActivity.this);
+            timerTextView.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            timerTextView.setGravity(Gravity.CENTER);
+            timerTextView.setTextSize(75);
+            timerTextView.setTypeface(null, Typeface.BOLD_ITALIC);
+            //timerTextView.setTextColor(getResources().getColor(R.color.timercolor));
+            myCameraRecordingFrameLayout.addView(timerTextView);
+            timerTextView.setVisibility(View.GONE);
+            recordingImageButton.setOnClickListener(this);
+            cameraFlipImageView.setOnClickListener(this);
+        }
+    }
 
-        private Camera getCameraInstance() {
+    private Camera getCameraInstance() {
         // TODO Auto-generated method stub
         Camera c = null;
-        try    {
-               c = Camera.open(); // attempt to get a Camera instance
+        try {
+            c = Camera.open(); // attempt to get a Camera instance
             c.setDisplayOrientation(90);
-        } catch (Exception e)
-               {
-                                 // Camera is not available (in use or does not exist)
-               }return c;        // returns null if camera is unavailable
+        } catch (Exception e) {
+            // Camera is not available (in use or does not exist)
         }
+        return c;        // returns null if camera is unavailable
+    }
 
-//    private  boolean checkAndRequestPermissions() {
+    //    private  boolean checkAndRequestPermissions() {
 //        int camera = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
 //        int storage = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 //        int loc = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -184,7 +176,7 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
 //    }
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private boolean prepareMediaRecorder() {
-        Log.i(TAG,"In prepareMediaRecorder Method");
+        Log.i(TAG, "In prepareMediaRecorder Method");
         myCamera = getCameraInstance();
         myCamera.unlock();
         mediaRecorder.setCamera(myCamera);
@@ -202,25 +194,24 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
         mediaRecorder.setPreviewDisplay(myCameraSurfaceView.getHolder().getSurface());
         try {
             mediaRecorder.prepare();
-        }   catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             releaseMediaRecorder();
-            Log.e("Preparing camera" ,e.getMessage());
+            Log.e("Preparing camera", e.getMessage());
+            return false;
+        } catch (IOException e) {
+            releaseMediaRecorder();
+            Log.e("Preparing camera", e.getMessage());
             return false;
         }
-            catch (IOException e) {
-            releaseMediaRecorder();
-            Log.e("Preparing camera" ,e.getMessage());
-            return false;
-        }
-            return true;
+        return true;
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void playAudio(String audio) {
-            Log.i(TAG,"In Play Audio method");
-            Uri myUri = Uri.parse(audio); // initialize Uri here
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        Log.i(TAG, "In Play Audio method");
+        Uri myUri = Uri.parse(audio); // initialize Uri here
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             mediaPlayer.setDataSource(getApplicationContext(), myUri);
             mediaPlayer.prepare();
@@ -233,7 +224,7 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
                     mediaPlayer.stop();
                     releaseMediaRecorder();
                     finish();
-                    if(usertype.equals("user1")) {
+                    if (usertype.equals("user1")) {
                         Intent intent = new Intent(getApplicationContext(), PlaceChallengeActivity.class);
                         intent.putExtra(AppConstants.PLAY_VIDEO, Environment.getExternalStorageDirectory().getPath() + File.separator + "challengevideo.mp4");
                         intent.putExtra(AppConstants.CHALLENGE_ID, ChallengeId);
@@ -241,12 +232,11 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
                         intent.putExtra(AppConstants.CHALLENGE_AUDIOPATH, audiopath);
                         intent.putExtra(AppConstants.CHAUDIO_ID, chaudioId);
                         startActivity(intent);
-                    }
-                    else
-                    {
+                    } else {
                         Intent intent = new Intent(getApplicationContext(), VideoPlayerActivity.class);
                         intent.putExtra(AppConstants.PLAY_VIDEO, Environment.getExternalStorageDirectory().getPath() + File.separator + "challengevideo.mp4");
                         intent.putExtra(AppConstants.CHALLENGE_ID, ChallengeId);
+                        startActivity(intent);
                     }
 //                     if you are using MediaRecorder, release it first
 //                    startActivity(new Intent(getApplicationContext(), PlaceChallengeActivity.class).putExtra(AppConstants.PLAY_VIDEO, Environment.getExternalStorageDirectory().getPath() + File.separator + "myvideo.mp4"));
@@ -260,24 +250,28 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
             progressBar.setProgressDrawable(drawable);
             final Handler handler = new Handler();
             new CountDownTimer(60000, 1000) {
-                    float progress = 1;
-                    public void onTick(long millisUntilFinished) {
+                float progress = 1;
+
+                public void onTick(long millisUntilFinished) {
                     progress += 1;
                     progressBar.setProgress((int) progress);
-                     }
-                    public void onFinish() {
-                     }
-                     }.start();
-                    handler.postDelayed(stopPlayerTask, AppConstants.ONE_MINUTE);
-                     } catch (IOException e) {
-                    Log.e("VideoRecordingActivity" ,e.getMessage());
-                     }
-            }
+                }
+
+                public void onFinish() {
+                }
+            }.start();
+            handler.postDelayed(stopPlayerTask, AppConstants.ONE_MINUTE);
+        } catch (IOException e) {
+            Log.e("VideoRecordingActivity", e.getMessage());
+        }
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         mediaPlayer.stop();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -286,7 +280,7 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
     }
 
     private void releaseMediaRecorder() {
-        Log.i(TAG,"In releaseMediaRecorder Method");
+        Log.i(TAG, "In releaseMediaRecorder Method");
         if (mediaRecorder != null) {
             mediaRecorder.reset();   // clear recorder configuration
             mediaRecorder.release(); // release the recorder object
@@ -298,7 +292,7 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
     }
 
     private void releaseCamera() {
-        Log.i(TAG,"In releaseCamera Method");
+        Log.i(TAG, "In releaseCamera Method");
         if (myCamera != null) {
             myCamera.release();      // release the camera for other applications
             myCamera = null;
@@ -308,20 +302,21 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
     protected void onResume() {
         super.onResume();
     }
+
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View clickView) {
         if (clickView.getId() == R.id.recordingImageButton) {
             if (recording) {
-                                        // stop recording and release camera
+                // stop recording and release camera
 //                mediaPlayer.stop();
 //                mediaRecorder.stop();   // stop the recording
 //                releaseMediaRecorder(); // release the MediaRecorder object
 //                                        //Exit after saved
 //                finish();
             } else {
-                                       //Release Camera before MediaRecorder start
+                //Release Camera before MediaRecorder start
 //                releaseCamera();
 
                 if (!prepareMediaRecorder()) {
@@ -335,12 +330,12 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
 
                         @Override
                         public void onFinish() {
-                                        // Camera is available and unlocked, MediaRecorder is prepared,
-                                        // now you can start recording
+                            // Camera is available and unlocked, MediaRecorder is prepared,
+                            // now you can start recording
                             timerTextView.setVisibility(View.GONE);
                             mediaRecorder.start();
                             playAudio(Environment.getExternalStorageDirectory().getPath() + File.separator + "mp3download.mp3");
-                                       // inform the user that recording has started
+                            // inform the user that recording has started
                             recording = true;
                         }
 
@@ -350,8 +345,7 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
                             if (timer >= 1) {
                                 timerTextView.setText(timer + "");
                                 timer--;
-                            }
-                            else if (timer == 0) {
+                            } else if (timer == 0) {
                                 timerTextView.setText("GO");
                                 timer--;
                             }
@@ -391,7 +385,7 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
             }
         }
         return cameraId;
-                                       }
+    }
 
 
     //downloading class
@@ -449,9 +443,10 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
                         output.close();
                     if (input != null)
                         input.close();
-                     }catch (IOException ignored) {}
+                } catch (IOException ignored) {
+                }
 
-                    if (connection != null)
+                if (connection != null)
                     connection.disconnect();
             }
             return null;
@@ -477,7 +472,7 @@ public class VideoRecordingActivity extends AppCompatActivity implements View.On
             mProgressDialog.dismiss();
 
             if (result != null) {
-                Toast.makeText(context, "Download error: " +result, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Download error: " + result, Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(context, "File downloaded", Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "Click  Record Button to Start Recording", Toast.LENGTH_LONG).show();

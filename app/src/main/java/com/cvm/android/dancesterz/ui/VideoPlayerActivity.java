@@ -1,14 +1,12 @@
 package com.cvm.android.dancesterz.ui;
 
-import android.app.Activity;
-import android.net.Uri;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
-
 
 import com.cvm.android.dancesterz.R;
 import com.cvm.android.dancesterz.dao.ChallengeViewDao;
@@ -93,7 +91,6 @@ public class VideoPlayerActivity extends BaseUIActivity implements OnTaskComplet
             getFragmentManager().beginTransaction()
                     .replace(R.id.videoRecording, MakeChallengeFragment.getInstance())
                     .commit();
-
 
 
 //                        VideoPlayer.getInstance().play();

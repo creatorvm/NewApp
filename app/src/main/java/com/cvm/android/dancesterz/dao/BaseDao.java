@@ -135,7 +135,7 @@ public class BaseDao {
         Log.d(TAG, "login Login with Server");
         RestTemplate restTemplate = getRestTemplate();
         try {
-            AuthRequest authRequest = new AuthRequest(username, password,"ANDROID","DEFAULT");
+            AuthRequest authRequest = new AuthRequest(username, password,"ANDROID","HOME");
             authResponse            = restTemplate.postForObject(URLs.URL_LOGIN, authRequest, AuthResponse.class);
             Log.d(TAG,authResponse.getToken()+authResponse.getUser().getUserId());
             REFRESH_TOKEN = authResponse.getRefreshToken();

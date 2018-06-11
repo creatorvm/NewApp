@@ -11,7 +11,6 @@ public class ChallegeResponse extends BaseResponse implements Serializable {
 
     private final static long serialVersionUID = 1L;
     protected List<ChallengeDto> challenges;
-    protected List<AcceptChallengeDto> accept;
     protected Boolean acceptChallenge;
 
     public List<ChallengeDto> getChallenges() {
@@ -24,14 +23,6 @@ public class ChallegeResponse extends BaseResponse implements Serializable {
 
     public Boolean getAcceptChallenge() {
         return acceptChallenge;
-    }
-
-    public List<AcceptChallengeDto> getAccept() {
-        return accept;
-    }
-
-    public void setAccept(List<AcceptChallengeDto> accept) {
-        this.accept = accept;
     }
 
     public void setAcceptChallenge(Boolean acceptChallenge) {

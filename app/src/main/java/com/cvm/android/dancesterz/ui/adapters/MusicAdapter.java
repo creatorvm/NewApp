@@ -55,6 +55,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
                 intent.putExtra(AppConstants.USERTYPE, "user1");
                 intent.putExtra(AppConstants.PLAY_AUDIO, audioArrayList.get(position).getSourcePath());
                 intent.putExtra(AppConstants.AUDIO_ID, audioArrayList.get(position).getId());
+                intent.putExtra(AppConstants.CHALLENGE_AUDIOPATH, audioArrayList.get(position).getSourcePath());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }

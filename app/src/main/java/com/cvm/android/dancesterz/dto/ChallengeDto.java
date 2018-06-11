@@ -23,6 +23,11 @@ public class ChallengeDto implements Serializable {
     protected AudioDto audio;
     Long totalVotes;
     protected Long challengeStatus;
+    protected List<Long> groupId;
+    protected Boolean challengeFollowers;
+    protected Boolean collectionFavourites;
+    protected ChallengeVisibility visibility;
+    protected Long totalChallengeViews;
 
     public UserSummary getOwner() {
         return owner;
@@ -166,4 +171,11 @@ public class ChallengeDto implements Serializable {
         this.responses = responses;
     }
 
+    public List<Long> getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(List<Long> groupId) {
+        this.groupId = groupId;
+    }
 }

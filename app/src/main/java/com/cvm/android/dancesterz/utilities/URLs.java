@@ -8,7 +8,7 @@ public class URLs {
 
 
 //    AWS URLSSSS
-    private static final String ROOT_URL = "http://danster-520271015.us-east-2.elb.amazonaws.com/";
+private static final String ROOT_URL = "http://dev-danster-1666399576.us-east-2.elb.amazonaws.com/";
     public static final String URL_REGISTER = ROOT_URL + "global/signup";
     public static final String URL_LOGIN = ROOT_URL + "rest/auth/login";
     public static final String URL_LOGIN_VALIDATE = ROOT_URL + "rest/auth/";
@@ -40,12 +40,15 @@ public class URLs {
     public static final String URL_NEWSFEEDS = ROOT_URL + "rest/challenge/newsFeads";
     public static final String URL_USER_WHOLE_DANCE_STYLES = ROOT_URL + "rest/users/dancestyles";
 
+    public static final String URL_GET_ALL_GROUPS = ROOT_URL + "rest/group/";
+    public static final String URL_CREATE_GROUP = ROOT_URL + "rest/group/";
+
     //LOCAL URLSSS
 
-//    private static final String ROOT_URL = "http://192.168.1.19:8006/";
-//    private static final String ROOT_URL1 = "http://192.168.1.19:8002/";
-//    private static final String ROOT_URL2 = "http://192.168.1.19:8004/";
-//    private static final String ROOT_URL3 = "http://192.168.1.19:8080/";
+//    private static final String ROOT_URL = "http://192.168.1.30:8006/";
+//    private static final String ROOT_URL1 = "http://192.168.1.30:8002/";
+//    private static final String ROOT_URL2 = "http://192.168.1.30:8004/";
+//    private static final String ROOT_URL3 = "http://192.168.1.30:8080/";
 //
 //    public static final String URL_REGISTER = ROOT_URL1 + "global/signup";
 //    public static final String URL_LOGIN = ROOT_URL1 + "rest/auth/login";
@@ -75,8 +78,8 @@ public class URLs {
 //    public static final String URL_GET_SEE_ALL_HOTCHALLENGE = ROOT_URL + "rest/challenge/hot";
 //    public static final String URL_GET_SEE_ALL_TRENDINGNOW= ROOT_URL + "rest/challenge/trends";
 //    public static final String URL_GET_SEE_ALL_NEWSFEEDS = ROOT_URL + "rest/challenge/newsFeads";
-//    public static final String URL_NEWSFEEDS = ROOT_URL + "rest/challenge/newsFeads";
-//      public static final String URL_USER_WHOLE_DANCE_STYLES = ROOT_URL1 + "rest/users/dancestyles";
+//    public static final String URL_NEWSFEEDS = ROOT_URL + "rest/challenge/newsFeads/3";
+//    public static final String URL_USER_WHOLE_DANCE_STYLES = ROOT_URL1 + "rest/users/dancestyles";
 
 //
 

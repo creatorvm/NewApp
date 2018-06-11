@@ -105,8 +105,8 @@ public class HomeScreenFragment extends Fragment {
             }
         });
 
-        getFragmentManager().beginTransaction().replace(R.id.firstLinearLayout, MyVideosFragment.newInstance(URLs.URL_GETHOTCHALLENGEVIDEOS, "Hot Challenges")).commit();
-        getFragmentManager().beginTransaction().replace(R.id.secondLinearLayout, MyVideosFragment.newInstance(URLs.URL_GETTRENDINGNOWVIDEOS, "Trending Now")).commit();
+        getFragmentManager().beginTransaction().replace(R.id.firstLinearLayout, MyVideosFragment.newInstance(URLs.URL_NEWSFEEDS, "Hot Challenges")).commit();
+        getFragmentManager().beginTransaction().replace(R.id.secondLinearLayout, MyVideosFragment.newInstance(URLs.URL_NEWSFEEDS, "Trending Now")).commit();
         getFragmentManager().beginTransaction().replace(R.id.newsFeedLinearLayout, NewsFeedsFragment.newInstance(URLs.URL_NEWSFEEDS, "News Feeds")).commit();
         getFragmentManager().beginTransaction().replace(R.id.banerLinearLayout, new BannerFragment()).addToBackStack(null).commit();
 

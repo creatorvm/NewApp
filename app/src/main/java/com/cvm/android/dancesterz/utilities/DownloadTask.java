@@ -40,6 +40,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
         OutputStream output = null;
         HttpURLConnection connection = null;
         try {
+
             Log.e("Song", sUrl[0]);
             URL url = new URL(sUrl[0]);
             connection = (HttpURLConnection) url.openConnection();
@@ -53,6 +54,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
             // this will be useful to display download percentage
             // might be -1: server did not report the length
             int fileLength = connection.getContentLength();
+            Log.e("File length", fileLength + "");
             // download the file
             input = connection.getInputStream();
 //            output = new FileOutputStream("/sdcard/download.m4a");
